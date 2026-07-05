@@ -1,0 +1,14 @@
+{
+  "token_name": "TEST",
+  "contract_verified": true,
+  "owner_can_mint": false,
+  "liquidity_locked": true,
+  "unlimited_approval": false,
+  "upgradeable_proxy": false,
+  "audit_available": true,
+  "honeypot": false,
+  "blacklisted": false,
+  "rug_score": 15,
+  "simulation_risk": false,
+  "gas_anomaly": false
+}
