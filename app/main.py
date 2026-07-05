@@ -4,16 +4,23 @@ from pydantic import BaseModel
 
 from app.services.guardian import analyze_transaction
 
-app = FastAPI()
+app = FastAPI(
+    title="Guardian AI Backend",
+    version="1.0.0",
+)
 
-# ✅ FIX: CORS (this solves OPTIONS 405 error)
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Local development
         "http://localhost:5173",
         "http://localhost:5174",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
+
+        # Production frontend (Vercel)
+        "https://guardian-ai-ybju-jm5avu8zl-jamism123.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -25,6 +32,14 @@ class ScanRequest(BaseModel):
     token_address: str
     chain: str = "ethereum"
     unlimited_approval: bool = False
+
+
+@app.get("/")
+async def root():
+    return {
+        "status": "online",
+        "service": "Guardian AI Backend",
+    }
 
 
 @app.post("/scan")
