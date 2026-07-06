@@ -9,20 +9,11 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS configuration
+# Hackathon/demo CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        # Local development
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
-
-        # Production frontend (Vercel)
-        "https://guardian-ai-ybju-jm5avu8zl-jamism123.vercel.app",
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -39,6 +30,14 @@ async def root():
     return {
         "status": "online",
         "service": "Guardian AI Backend",
+        "version": "1.0.0",
+    }
+
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy",
     }
 
 
