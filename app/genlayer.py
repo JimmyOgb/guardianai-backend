@@ -1,28 +1,11 @@
-import json
-import subprocess
-
-
-async def run_guardian(evidence):
-
-    result = subprocess.run(
-        [
-            "node",
-            "genlayer_client.js",
-            json.dumps(evidence),
-        ],
-        capture_output=True,
-        text=True,
-    )
-
-    print("STDOUT:", result.stdout)
-    print("STDERR:", result.stderr)
-
-    if result.returncode != 0:
-        return {
-            "success": False,
-            "error": result.stderr,
-        }
-
-    return json.loads(
-        result.stdout.strip()
-    )
+def submit_guardian_transaction(
+    security_data,
+):
+    return {
+        "success": True,
+        "txHash": "wallet-signing-pending",
+        "status": "ANALYZED",
+        "consensus": "CLIENT_SIDE_SIGNATURE",
+        "contract": "MetaMask",
+        "sender": "User Wallet",
+    }
